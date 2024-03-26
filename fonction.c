@@ -3,7 +3,7 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 #include "fonction.h"
-
+#include "enemie.h"
 // ****** traitement des images******/////
 void initialiser_imageBACK(image *imge, int x, int y, int w, int h, char emplacement[])
 {
@@ -263,11 +263,39 @@ int play(SDL_Surface *screen, int volume)
     image IMAGE ;
     SDL_Event event;
  initialiser_imageBACK(&IMAGE, 0, 0, 1280, 720, "images/cheela.png");
-int boucle =1; 
+int boucle =1;
+
+
+    static int num_start = 0, coll_number = 0;
+    num_start ++;
+    printf("start playing %d \n", num_start);
+	personnage p;
+	
+	enemie en;
+	entity e; 
+
+	// initialiser_perso (&p) ;
+    initentity (&e);
+	initennemi (&en) ;
+        
+
+	p.perso=IMG_Load("images/perso.png");
+	p.perso_pos.x=100;
+	p.perso_pos.y=100;
+    p.perso_pos.w=49;
+	p.perso_pos.h=126;
+
+    printf("w %d\n",p.perso_pos.w);
+    printf("h %d\n",p.perso_pos.h);
+
+    printf("w %d\n",p.perso_pos.x);
+    printf("h %d\n",p.perso_pos.y);
+
+    SDL_EnableKeyRepeat(200, 0); // need doc $$$$$
+
 while (boucle)
 {
-   afficher_image(screen, IMAGE);
-   SDL_Flip(screen);
+    afficher_image(screen, IMAGE);
    while (SDL_PollEvent(&event))
    {
     switch (event.type)
@@ -285,10 +313,40 @@ while (boucle)
                     case SDLK_ESCAPE :
                     boucle = 0 ; //espace retour au menu
                     break ; 
+                                
+                                case SDLK_RIGHT:    
+                                      p.perso_pos.x += 10;
+                                        break;
+
+                                case SDLK_LEFT: 
+                                        p.perso_pos.x -= 10;                                                                     
+                                        break;
+                                case SDLK_UP: 
+                                        p.perso_pos.y -= 10;
+                                        break;
+                                case SDLK_DOWN: 
+                                      p.perso_pos.y += 10;
+                                        break; 
                 }
     }
    }
-   
+
+    animerentity(&e); 
+	update_ennemie (&en,&p);  
+    int a =1;
+    if(collision(&p,&en)){
+        coll_number++;
+    printf("collision %d \n", coll_number);
+}
+	// a = gerer(&en);
+
+	 afficher_perso(screen, p);
+    afficherennemi(en ,screen);
+ afficherentity(e, screen);
+   	
+    SDL_Delay(10);
+    
+   SDL_Flip(screen);
 }
 liberer_image(IMAGE);
 return volume ; 

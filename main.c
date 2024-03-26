@@ -212,17 +212,17 @@ int main()
         displayText(txte,screen);
     }
     // liberer les surfaces
-    printf("debug1\n");liberer_image(IMAGE);
-    printf("debug1\n");liberer_image(IMAGE1);
-    printf("debug1\n");liberer_image(IMAGE2);
-    printf("debug1\n");liberer_image(IMAGE3);
-    printf("debug1\n");liberer_image(IMAGE4);
-    printf("debug1\n");liberer_image(IMAGE_PLAY_OFF);
-    printf("debug1\n");liberer_image(IMAGE_SETTING_OFF);
-    printf("debug1\n");liberer_image(IMAGE_QUIT_OFF);
-    printf("debug1\n");liberer_image(IMAGE_PLAY_ON);
-    printf("debug1\n");liberer_image(IMAGE_SETTING_ON);
-    printf("debug1\n");liberer_image(IMAGE_QUIT_ON);
+    liberer_image(IMAGE);
+    liberer_image(IMAGE1);
+    liberer_image(IMAGE2);
+    liberer_image(IMAGE3);
+    liberer_image(IMAGE4);
+    liberer_image(IMAGE_PLAY_OFF);
+    liberer_image(IMAGE_SETTING_OFF);
+    liberer_image(IMAGE_QUIT_OFF);
+    liberer_image(IMAGE_PLAY_ON);
+    liberer_image(IMAGE_SETTING_ON);
+    liberer_image(IMAGE_QUIT_ON);
 
     // liberer la musique
     // liberer_musique(music);
